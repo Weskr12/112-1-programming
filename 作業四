@@ -2,10 +2,10 @@
 
 int chess[9][9]={   {0,0,0,0,0,0,0,0},
                     {0,0,0,0,0,0,0,0},
-                    {0,0,0,0,2,0,0,0},
-                    {0,0,1,1,1,1,0,0},
-                    {0,0,0,1,2,0,0,0},
                     {0,0,0,0,0,0,0,0},
+                    {0,0,1,1,1,0,0,0},
+                    {0,0,0,1,2,1,0,0},
+                    {0,0,0,0,0,2,0,0},
                     {0,0,0,0,0,0,0,0},
                     {0,0,0,0,0,0,0,0}};
 int ans_x_y[9][9]={{0,0,0,0,0,0,0,0},
@@ -22,6 +22,14 @@ int finding(int pos_x,int pos_y,int pos_color);
 int In_chess(int x,int y,int i,int j);
 
 int main(){
+/*
+    for(int i=0;i<8;i++){
+        for(int j=0;j<8;j++){
+            scanf("%d",&chess[i][j]);
+        }
+    }
+*/
+
 
     int pos_x=0,pos_y=0,pos_color=0,reverse_color=0;
 //    |~~~~~~~~~~~~~~~~~~~~~~~~Q2~~~~~~~~~~~~~~~~~~~~~~~~|
@@ -41,7 +49,7 @@ int main(){
                 }
             }
         }
-
+        printf("move color:%d\n",pos_color);
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
                 printf("%d",ans_x_y[i][j]);
