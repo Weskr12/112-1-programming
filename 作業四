@@ -1,0 +1,118 @@
+#include<stdio.h>
+
+int chess[9][9]={   {0,0,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,0,0},
+                    {0,0,0,1,2,0,0,0},
+                    {0,0,0,2,1,0,0,0},
+                    {0,0,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,0,0}};
+int ans_x_y[9][9]={{0,0,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,0,0}};
+
+int finding(int pos_x,int pos_y,int pos_color);
+
+int In_chess(int x,int y,int i,int j);
+
+int main(){
+
+    int pos_x=0,pos_y=0,pos_color=0,reverse_color=0;
+//    |~~~~~~~~~~~~~~~~~~~~~~~~Q2~~~~~~~~~~~~~~~~~~~~~~~~|
+    int find=1;
+    while(find){
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                pos_x=i;
+                pos_y=j;
+                int pos_color =1;
+                if(chess[pos_x][pos_y]==0){
+                    finding(pos_x,pos_y,pos_color);
+
+
+                }
+            }
+        }
+
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                printf("%d",ans_x_y[i][j]);
+            }
+            printf("\n");
+        }
+        scanf("%d",&find);
+
+    }
+}
+
+int In_chess(int x,int y, int i,int j){
+    if((i!=0 && x<8 && x>0)&&j==0){//垂直方向就算在邊邊（y=0,y=7也可判斷）
+
+        return 1;
+    }
+    else if((j!=0 && y<8 && y>0)&&i==0){//水平...
+        return 1;
+    }
+    else if((i!=0 && x<8 && x>0)&&(j!=0 && y<8 && y>0)){//斜角
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int ReverseColor(int pos_color){
+    if(pos_color==1){
+        return 2;
+    }
+    else if(pos_color==2){
+        return 1;
+    }
+}
+
+int finding(int pos_x,int pos_y,int pos_color){
+    for(int i=-1;i<2;i++){
+        for(int j=-1;j<2;j++){
+            int x=pos_x;
+            int y=pos_y;
+            int last=0;
+            int reverse_color=ReverseColor(pos_color);
+            while(In_chess(x,y,i,j)){
+
+
+                if(chess[x+i][y+j]==reverse_color){
+
+                    last=reverse_color;
+                }
+                else if(chess[x+i][y+j]==pos_color){
+                    if(last==reverse_color){//遇上同色then如果上個棋子是反色代表可以下
+                        ans_x_y[pos_x][pos_y]=1;//儲存是否可以放置
+
+                        break;
+
+                    }
+                }
+                else if(chess[x+i][y+j]==0){
+                    break;
+                }
+
+
+
+                x=x+i;
+                y=y+j;
+
+
+
+            }
+
+        }
+    }
+    return 0;
+
+}
