@@ -2,9 +2,9 @@
 
 int chess[9][9]={   {0,0,0,0,0,0,0,0},
                     {0,0,0,0,0,0,0,0},
-                    {0,0,0,0,0,0,0,0},
+                    {0,0,0,0,2,0,0,0},
+                    {0,0,1,1,1,1,0,0},
                     {0,0,0,1,2,0,0,0},
-                    {0,0,0,2,1,0,0,0},
                     {0,0,0,0,0,0,0,0},
                     {0,0,0,0,0,0,0,0},
                     {0,0,0,0,0,0,0,0}};
@@ -86,28 +86,29 @@ int finding(int pos_x,int pos_y,int pos_color){
             int last=0;
             int reverse_color=ReverseColor(pos_color);
             while(In_chess(x,y,i,j)){
+                x=x+i;
+                y=y+j;
 
-
-                if(chess[x+i][y+j]==reverse_color){
+                if(chess[x][y]==reverse_color){
 
                     last=reverse_color;
                 }
-                else if(chess[x+i][y+j]==pos_color){
+                else if(chess[x][y]==pos_color){
                     if(last==reverse_color){//遇上同色then如果上個棋子是反色代表可以下
                         ans_x_y[pos_x][pos_y]=1;//儲存是否可以放置
 
                         break;
-
+                    }
+                    else{
+                        break;
                     }
                 }
-                else if(chess[x+i][y+j]==0){
+                else if(chess[x][y]==0){
                     break;
                 }
 
 
 
-                x=x+i;
-                y=y+j;
 
 
 
