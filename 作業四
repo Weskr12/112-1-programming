@@ -27,11 +27,13 @@ int main(){
 //    |~~~~~~~~~~~~~~~~~~~~~~~~Q2~~~~~~~~~~~~~~~~~~~~~~~~|
     int find=1;
     while(find){
+        int pos_color;
+        scanf("%d",&pos_color);
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
                 pos_x=i;
                 pos_y=j;
-                int pos_color =1;
+
                 if(chess[pos_x][pos_y]==0){
                     finding(pos_x,pos_y,pos_color);
 
