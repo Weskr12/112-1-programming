@@ -1,0 +1,15 @@
+#include<stdio.h>
+#include <stdlib.h>
+
+typedef coordinate{
+    int x,y;
+};
+
+typedef Node{
+
+};
+
+
+int main(){
+
+}
