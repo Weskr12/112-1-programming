@@ -1,15 +1,81 @@
 #include<stdio.h>
-#include <stdlib.h>
+#include<stdlib.h>
 
-typedef coordinate{
+typedef struct{
     int x,y;
+}coordinate;
+
+struct Node{
+    coordinate coord;
+    struct Node* next;
 };
 
-typedef Node{
+typedef struct Node Stack_Node;
+typedef Stack_Node *Linked_Stack;
 
-};
+Linked_Stack top=NULL;
 
+int isEmpty();
+void push(int,int);
+coordinate pop();
 
 int main(){
+    int x,y;
+
+
+
+
+    for(int i=0;i<10;i++){
+		scanf("%d%d",&x,&y);
+		push(x,y);
+	}
+	while(!isEmpty()){
+	    coordinate ans;
+        ans=pop();
+		printf("%d,%d\n",ans.x,ans.y);
+	}
+	return 0;
 
 }
+
+int isEmpty(){
+    if(top ==NULL){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+void push(int datax,int datay){
+    Linked_Stack new_add_node;
+    new_add_node = (Linked_Stack)malloc(sizeof(Stack_Node));
+    new_add_node->coord.x=datax;
+    new_add_node->coord.y=datay;
+    new_add_node->next=top;
+    top = new_add_node;
+}
+
+coordinate pop(){
+    coordinate temp;
+    Linked_Stack ptr;
+    if(isEmpty()==1){
+        temp.x=-1;
+        temp.y=-1;
+        return temp;
+    }
+    else{
+        ptr = top;
+        temp.x=ptr->coord.x;
+        temp.y=ptr->coord.y;
+        top = ptr->next;
+        free(ptr);
+
+        printf("free");
+        return temp;
+    }
+    free(ptr);
+
+}
+
+
