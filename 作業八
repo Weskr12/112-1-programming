@@ -1,6 +1,16 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+
+bool arround(int x,int y);
+int maze[5][5]={{1,1,1,1,1},
+                {0,0,0,0,1},
+                {1,0,1,0,1},
+                {1,0,1,0,0},
+                {1,1,1,1,1}};
+
+
+//=======================stack==========================================
 typedef struct{
     int x,y;
 }coordinate;
@@ -14,30 +24,98 @@ typedef struct Node Stack_Node;
 typedef Stack_Node *Linked_Stack;
 
 Linked_Stack top=NULL;
-
 int isEmpty();
 void push(int,int);
 coordinate pop();
+//======================================================================
+
 
 int main(){
-    int x,y;
+    int De[2];
+    int repeat[5][5]
+    int x=1,y=0;//start(1,0)
+    int endx=3,endy=4;//end(3,4)
+    coordinate temp_coord;
+
+    for(int i=1;i<=4;i++){
+        direction(i,De);
+        int dx=De[0],dy=De[1];
+        if(maze[x+dx][y+dy]==0){
+            maze[x][y]=-1;
+            push(x+dx,y+dy);
+
+            x=x+dx;
+            y=y+dy;
+
+            continue;
+        }
+        else if(maze[x+dx][y+dy]==-1){
+            if(arround(x,y)==0){
+                temp_coord=pop();
+            }
+            else{
+                continue;
+            }
+
+        }
+
+    }
 
 
+//////////對答案時要記得使用pop否則沒有free/////////////////
 
-
-    for(int i=0;i<10;i++){
-		scanf("%d%d",&x,&y);
-		push(x,y);
-	}
+/*
 	while(!isEmpty()){
 	    coordinate ans;
         ans=pop();
 		printf("%d,%d\n",ans.x,ans.y);
-	}
+	}*/
 	return 0;
 
 }
 
+//======================================================================
+
+int direction(int i,int* De){
+    if(i==1){
+        De[0]=0;
+        De[1]=-1;
+    }
+    else if(i==2){
+        De[0]=-1;
+        De[1]=0;
+    }
+    else if(i==3){
+        De[0]=0;
+        De[1]=1;
+    }
+    else if(i==4){
+        De[0]=1;
+        De[1]=0;
+    }
+}
+
+int arround(int x,int y){
+    int step=0;
+    if(maze[x-1][y]==0){
+        step++;
+    }
+    if(maze[x][y-1]==0){
+        step++;
+    }
+    if(maze[x+1][y]==0){
+        step++;
+    }
+    if(maze[x][y+1]==0){
+        step++;
+    }
+    return step;
+}
+
+
+
+
+//=======================stack==========================================
 int isEmpty(){
     if(top ==NULL){
         return 1;
@@ -55,7 +133,6 @@ void push(int datax,int datay){
     new_add_node->next=top;
     top = new_add_node;
 }
-
 coordinate pop(){
     coordinate temp;
     Linked_Stack ptr;
@@ -75,7 +152,9 @@ coordinate pop(){
         return temp;
     }
     free(ptr);
-
 }
+//======================================================================
+
+
 
 
